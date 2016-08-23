@@ -1,1 +1,134 @@
-Sup world
+<!DOCTYPE html>
+<html>
+<head>
+    <title> <(' ) </title>
+    <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script src="static/js/bootstrap.js"></script>
+
+    <script src="static/js/three.min.js"></script>
+    <script src="static/js/OrbitControls.js"></script>
+    <script src="static/js/brains.js"></script>
+
+    <link href="static/css/bootstrap.css" rel="stylesheet" media="screen">
+    <link href="static/css/style.css" rel="stylesheet" media="screen">
+    <link href="static/css/animate.css" rel="stylesheet" media="screen">
+    <!-- <link href="/static/css/bootstrap-responsive.min.css" rel="stylesheet"> -->
+    <script src="https://use.fontawesome.com/e38c2197df.js"></script>
+
+    <style>
+        /*body {
+            margin: 0;
+            overflow: hidden;
+        }*/
+    </style>
+</head>
+
+<script id="VertexShader" type="x-shader/x-vertex">
+    precision highp float;
+    precision highp int;
+
+    attribute vec3 color;
+    attribute float pSize;
+    attribute float pOpacity;
+    attribute float pJitterEffect;   //Ivo add
+
+    uniform float size;
+    uniform float scale;
+
+    varying vec3 vColor;
+    varying float vOpacity;
+    attribute float vJitterEffect;   //Ivo add
+
+    // Ivo implemented for Animation
+    uniform float uTime;
+    uniform float uEffectAmount;
+    // Do I need vZ and vUv?
+    // varying vec2 vUv
+
+    // Line work
+    /////////////
+    // Done manually at first
+    // attribute vec2 a_pos;       // Who's pos?
+    // attribute vec2 a_normal;    // Who's Normal? Make externally
+
+    // uniform float u_linewidth;  // Make externally
+    // uniform mat4 u_mv_matrix;
+    // uniform mat4 u_p_matrix;
+
+    // void main() {
+    //     vec4 delta = vec4(a_normal * u_linewidth, 0, 0);
+    //     vec4 pos = u_mv_matrix * vec4(a_pos, 0, 1);
+    //     gl_Position = u_p_matrix * (pos + delta);
+    // }
+    ///////////////
+
+    void main() {
+
+        // vUv = uv;
+        vColor = color;
+        vOpacity = pOpacity;
+
+        vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
+        ////////////
+        // mapped shader controllers
+        float vJitterEffect = pJitterEffect;
+        float effectAmount = uEffectAmount;
+
+        // eff trig, try this displacement noise: http://www.ro.me/tech/demos/8/index.html
+        mvPosition.y += 0.1*sin(uTime*1.0)*effectAmount*pJitterEffect;
+
+        /////////
+
+        gl_Position = projectionMatrix * mvPosition;
+
+        gl_PointSize = 2.0 * pSize * size * ( scale / length( mvPosition.xyz ) );
+    }
+
+</script>
+
+<script id="FragmentShader" type="x-shader/x-fragment">
+    precision highp float;
+    precision highp int;
+
+    // varying vec2 vUv;
+
+    uniform vec3 psColor;
+    uniform float opacity;
+
+    varying vec3 vColor;
+    varying float vOpacity;
+
+    uniform sampler2D map;
+
+    void main() {
+        gl_FragColor = vec4( psColor, vOpacity );
+        gl_FragColor = gl_FragColor * texture2D( map, vec2( gl_PointCoord.x, 1.0 - gl_PointCoord.y ) );
+        gl_FragColor = gl_FragColor * vec4( vColor, 1.0 );
+    }
+</script>
+<body>
+    <div class="bg3JS">
+
+    </div>
+
+    <div class="intro">
+        <h2> Hi! 
+            <br>In the middle of projects,
+            <br>new updates in the works. 
+            <br><br> Connect via 
+            <a href="https://angel.co/ivo-rivetta" class="fa fa-angellist icon" target="_blank"></a>
+            <br>
+            <br> -Ivo 
+
+
+        </h2>
+        
+    </div>
+
+        
+    <div>
+        <i class="fa fa-angellist" aria-hidden="true"></i>
+    </div>
+
+</body>
+</html>
