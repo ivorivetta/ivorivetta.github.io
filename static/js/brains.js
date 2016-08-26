@@ -605,15 +605,17 @@ function onDocumentMouseMove( event ) {
             var ub = 200;
             if (cntHover>lb && cntHover < ub) {
                 // appear
-                document.getElementsByClassName("intro")[0].style.opacity = 1;
+                document.getElementById("intro").style.opacity = 1;
                 
             } else if (cntHover>ub) {
                 // disappear
-                document.getElementsByClassName("intro")[0].style.opacity = 0;
+                document.getElementById("intro").style.opacity = 0;
+                document.getElementById("menuBar").style.opacity = 1;
+
 
             } else if (cntHover>(ub+1)) {
                 // rm intro
-                document.body.removeChild(document.getElementsByClassName("intro")[0]);
+                // document.body.removeChild(document.getElementsByID("intro")[0]);
             }
             // indPOI = intersects[ 0 ].index;
             
