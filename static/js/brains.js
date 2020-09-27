@@ -566,7 +566,6 @@ function render() {
 
 function oneTimeCheck(){
             oneTimeCheck = Function("");
-            console.log(Date.now()-timerStart);
         }
 
 function onWindowResize() {
