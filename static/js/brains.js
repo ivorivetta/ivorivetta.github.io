@@ -604,12 +604,12 @@ function onDocumentMouseMove( event ) {
             var ub = 200;
             if (cntHover>lb && cntHover < ub) {
                 // appear
-                document.getElementById("intro").style.opacity = 1;
+                // document.getElementById("intro").style.opacity = 1;
                 
             } else if (cntHover>ub) {
                 // disappear
-                document.getElementById("intro").style.opacity = 0;
-                document.getElementById("menuBar").style.opacity = 1;
+                // document.getElementById("intro").style.opacity = 0;
+                // document.getElementById("menuBar").style.opacity = 1;
 
 
             } else if (cntHover>(ub+1)) {

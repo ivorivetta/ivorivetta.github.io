@@ -108,7 +108,7 @@ note: z-index only works on positioned items;
     left: 10px;
     top: 10px;
     z-index: 10;
-    opacity: 0;
+    opacity: 1;
     /*display: none;*/
     -moz-transition: opacity 0.96s cubic-bezier(0.4, 0, 1, 1);
     -webkit-transition: opacity 0.96s cubic-bezier(0.4, 0, 1, 1);
@@ -129,7 +129,7 @@ h1.intro b span{font-weight:300;opacity:0.7;}
     right: 5px;
     top: 5px;
     z-index: 10;
-    opacity: 0;
+    opacity: 1;
     /*display: none;*/
     -moz-transition: opacity 0.96s cubic-bezier(0.4, 0, 1, 1);
     -webkit-transition: opacity 0.96s cubic-bezier(0.4, 0, 1, 1);
